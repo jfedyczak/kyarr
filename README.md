@@ -34,6 +34,27 @@ After removing SD card and rebooting into eMMC:
 
 	# apt-get install alsa-base
 	# timedatectl set-timezone Europe/Warsaw
+	# apt-get install dosfstools
+
+## SD card management
+
+### Creating new partition map
+
+Partition script `clear.sfdisk`:
+
+	label: dos
+	label-id: 0x6b797272
+	unit: sectors
+
+	start=8192, type=b
+
+Where `0x6b797272` is a magic number of your choice. Apply partition script:
+
+	# sfdisk /dev/mmcblk1 < clear.sfdisk
+
+Format partition:
+
+	# mkfs.vfat -n KYARR /dev/mmcblk1p1
 
 ## Recording instructions
 
@@ -52,6 +73,6 @@ This gives:
 Then use `-D hw:2,0` to record from card 2, device 0:
 
 
-	arecord --max-file-time 180 -D hw:2,0 -t wav -c 1 -r 44100 -f S16_LE --use-strftime /mnt/%Y/%m/%d/%H/rec-%H-%M-%v.wav
+	arecord --max-file-time 180 -D hw:2,0 -t wav -c 1 -r 44100 -f S16_LE --use-strftime /mnt/%Y-%m-%d/%H/rec-%H%M%S-%v.wav
 
 It will create new file every `180` seconds.
