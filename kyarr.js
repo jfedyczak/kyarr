@@ -119,7 +119,7 @@ const mount = (callback) => {
 			})
 		},
 		(cb) => {
-			child_process.exec('mount -t vfat -o flush /dev/mmcblk1p1 /tmp/sdcard', (err, so, se) => {
+			child_process.exec('mount -t vfat -o flush,sync /dev/mmcblk1p1 /tmp/sdcard', (err, so, se) => {
 				cb(err)
 			})
 		}
