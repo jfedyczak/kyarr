@@ -18,8 +18,8 @@
 
 	# mount /dev/mmcblk1p2 /mnt/
 	# cd /etc/wpa_supplicant
-	root@FriendlyARM:/mnt/etc/wpa_supplicant# cp /etc/wpa_supplicant/wpa_supplicant.conf ./
-	root@FriendlyARM:/mnt/etc/wpa_supplicant# cat wpa_supplicant.conf
+	# cp /etc/wpa_supplicant/wpa_supplicant.conf ./
+	# cat wpa_supplicant.conf
 	ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
 	update_config=1
 	network={
@@ -35,6 +35,7 @@ After removing SD card and rebooting into eMMC:
 	# apt-get install alsa-base
 	# timedatectl set-timezone Europe/Warsaw
 	# apt-get install dosfstools
+	# apt-get install avahi-daemontools
 
 ## SD card management
 
@@ -73,6 +74,6 @@ This gives:
 Then use `-D hw:2,0` to record from card 2, device 0:
 
 
-	arecord --max-file-time 180 -D hw:2,0 -t wav -c 1 -r 44100 -f S16_LE --use-strftime /mnt/%Y-%m-%d/%H/rec-%H%M%S-%v.wav
+	arecord --max-file-time 180 -D hw:2,0 -t wav -c 1 -r 44100 -f S16_LE --use-strftime /mnt/%Y-%m-%d/rec-%H%M%S-%v.wav
 
 It will create new file every `180` seconds.
