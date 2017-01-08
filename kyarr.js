@@ -159,6 +159,7 @@ const eraseOldestFile = (callback) => {
 	let firstDir = null
 	let firstFile = null
 	taskSeries([
+		(cb) => { blink('green', 2, cb) },
 		(cb) => {
 			fs.readdir('/tmp/sdcard', (e, list) => {
 				list = list.filter((d) => {
